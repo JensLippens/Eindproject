@@ -1,0 +1,17 @@
+<mat-accordion multi="true" *ngIf="producten.length > 0">
+  <mat-expansion-panel *ngFor="let product of producten">
+    <mat-expansion-panel-header>
+      {{ product.naam }}
+    </mat-expansion-panel-header>
+    <p>{{ product.omschrijving }}</p>
+    <p>{{ product.prijs }}</p>
+    <p>{{ product.verpakking }}</p>
+    <p>{{ product.inhoud }}</p>
+    <p>{{ product.categorie }}</p>
+    <mat-action-row>
+      <button mat-button color="primary">EDIT</button>
+      <button mat-button color="warn" (click)="onDelete(product.id)">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<p class="info-text mat-body-1" *ngIf="producten.length <= 0">No posts added yet!</p>

@@ -1,0 +1,74 @@
+<mat-card>
+  <form (submit)="onAddProduct(postForm)" #postForm="ngForm">
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        name="naam"
+        ngModel
+        required
+        placeholder="Naam product"
+        #naam="ngModel">
+      <mat-error *ngIf="naam.invalid">Geef een correcte productnaam op.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        name="omschrijving"
+        ngModel
+        required
+        placeholder="Omschrijving product"
+        #omschrijving="ngModel">
+      <mat-error *ngIf="omschrijving.invalid">Geef een correcte omschrijving op.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        name="prijs"
+        ngModel
+        required
+        placeholder="Prijs product"
+        #prijs="ngModel">
+      <mat-error *ngIf="prijs.invalid">Geef een correcte prijs op.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        name="verpakking"
+        ngModel
+        required
+        placeholder="Verpakking product"
+        #verpakking="ngModel">
+      <mat-error *ngIf="verpakking.invalid">Geef een correcte verpakking op.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        name="inhoud"
+        ngModel
+        required
+        placeholder="Inhoud product"
+        #inhoud="ngModel">
+      <mat-error *ngIf="inhoud.invalid">Geef een correcte inhoud op.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        name="categorie"
+        ngModel
+        required
+        placeholder="Categorie product"
+        #categorie="ngModel">
+      <mat-error *ngIf="categorie.invalid">Geef een correcte categorie op.</mat-error>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit">Opslaan Product</button>
+  </form>
+</mat-card>
