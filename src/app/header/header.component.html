@@ -1,3 +1,27 @@
 <mat-toolbar color="primary">
   <span>Blush Beauty</span>
+  <ul>
+    <li>
+      <a mat-button routerLink="/producten/list" routerLinkActive="mat-warn">Productenlijst</a>
+    </li>
+    <li>
+      <a mat-button routerLink="/producten/create" routerLinkActive="mat-accent">Nieuw product</a>
+    </li>
+  </ul>
+  <span class="spacer"></span>
+  <ul>
+<!--     <li *ngIf="userIsAuthenticated">
+      <a mat-button routerLink="/create" routerLinkActive="mat-accent">New Post</a>
+    </li> -->
+    <li>
+      <a mat-button routerLink="/auth/login" routerLinkActive="mat-accent">Login</a>
+    </li>
+    <li>
+      <a mat-button routerLink="/auth/signup" routerLinkActive="mat-accent">Signup</a>
+    </li>
+    <li>
+      <button mat-button>Logout</button>
+    </li>
+  </ul>
+
 </mat-toolbar>

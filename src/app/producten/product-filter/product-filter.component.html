@@ -1,0 +1,71 @@
+<h3>Catalogus filteren op:</h3>
+<mat-accordion multi="true" >
+  <mat-expansion-panel >
+    <mat-expansion-panel-header>
+      Naam
+    </mat-expansion-panel-header>
+    <mat-form-field hintLabel="niet hoofdlettergevoelig" appearance="outline" class="searchBox">
+      <mat-label>Zoekterm</mat-label>
+      <input matInput type="text" #filterNaam placeholder="Naam product">
+    </mat-form-field>
+    <!-- <input matInput type="text" #filterNaam placeholder="Naam product"> -->
+  </mat-expansion-panel>
+
+  <mat-expansion-panel >
+    <mat-expansion-panel-header>
+      Prijs
+    </mat-expansion-panel-header>
+    <mat-form-field appearance="outline" class="searchBox">
+      <mat-label>Minimum</mat-label>
+      <input matInput type="number" #prijsMin placeholder="Minimumprijs">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="searchBox">
+      <mat-label>Maximum</mat-label>
+      <input matInput type="number" #prijsMax placeholder="Maximumprijs">
+    </mat-form-field>
+    <!-- <input matInput type="number" #prijsMin placeholder="Minimumprijs"> -->
+    <!-- <input matInput type="number" #prijsMax placeholder="Maximumprijs"> -->
+  </mat-expansion-panel>
+
+  <mat-expansion-panel >
+    <mat-expansion-panel-header>
+      Inhoud
+    </mat-expansion-panel-header>
+    <mat-form-field appearance="outline" class="searchBox">
+      <mat-label>Minimum</mat-label>
+      <input matInput type="number" #inhoudMin placeholder="Minimuminhoud">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="searchBox">
+      <mat-label>Maximum</mat-label>
+      <input matInput type="number" #inhoudMax placeholder="Maximuminhoud">
+    </mat-form-field>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel >
+    <mat-expansion-panel-header>
+      Categorie
+    </mat-expansion-panel-header>
+    <mat-label>Kies Categorie</mat-label>
+    <mat-selection-list #lijstCategorie>
+      <mat-list-option
+        *ngFor="let cat of categories"
+        [value]="cat"
+        [selected]="cat"
+        (click)="onListChanged(lijstCategorie)">
+          {{cat}}
+      </mat-list-option>
+     </mat-selection-list>
+    <!-- <mat-select #zoekCategorie>
+      <div *ngFor="let cat of categories">
+        <mat-option value="{{cat}}">{{cat}}</mat-option>
+      </div>
+    </mat-select> -->
+  </mat-expansion-panel>
+</mat-accordion>
+<div>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="filterProducten(filterNaam.value, prijsMin.value, prijsMax.value, selectedCat)"
+  >Pas filters toe</button>
+</div>

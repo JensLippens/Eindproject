@@ -1,0 +1,14 @@
+:host {
+  width: 10rem;
+}
+
+h1 {
+  width: 100%;
+}
+
+mat-accordion {
+  margin-bottom: 5rem;
+}
+mat-expansion-panel-header {
+  background-color:greenyellow;
+}

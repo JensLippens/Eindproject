@@ -1,74 +1,64 @@
 <mat-card>
-  <form (submit)="onAddProduct(postForm)" #postForm="ngForm">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form [formGroup]="form" (submit)="onSaveProduct()" *ngIf="!isLoading">
     <mat-form-field>
       <input
         matInput
         type="text"
-        name="naam"
-        ngModel
-        required
-        placeholder="Naam product"
-        #naam="ngModel">
-      <mat-error *ngIf="naam.invalid">Geef een correcte productnaam op.</mat-error>
+        formControlName="naam"
+        placeholder="Naam product">
+      <mat-error *ngIf="form.get('naam').invalid">Gelieve een productnaam op te geven</mat-error>
+    </mat-form-field>
+    <div>
+      <button mat-stroked-button type="button" (click)="filePicker.click()">Kies foto</button>
+      <input type="file" #filePicker (change)="onImagePicked($event)">
+    </div>
+    <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+      <img [src]="imagePreview" [alt]="form.value.naam">
+    </div>
+    <mat-form-field>
+      <textarea matInput rows="4" formControlName="omschrijving" placeholder="Omschrijving product"></textarea>
+      <mat-error *ngIf="form.get('omschrijving').invalid">Gelieve een productomschrijving op te geven</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input
-        matInput
-        type="text"
-        name="omschrijving"
-        ngModel
-        required
-        placeholder="Omschrijving product"
-        #omschrijving="ngModel">
-      <mat-error *ngIf="omschrijving.invalid">Geef een correcte omschrijving op.</mat-error>
+      <input matInput type="number" formControlName="prijs" placeholder="Prijs product">
+      <mat-error *ngIf="form.get('prijs').invalid">Gelieve een prijs op te geven</mat-error>
     </mat-form-field>
+
     <mat-form-field>
-      <input
-        matInput
-        type="text"
-        name="prijs"
-        ngModel
-        required
-        placeholder="Prijs product"
-        #prijs="ngModel">
-      <mat-error *ngIf="prijs.invalid">Geef een correcte prijs op.</mat-error>
+      <mat-label>Kies Verpakking</mat-label>
+      <mat-select formControlName="verpakking">
+        <div *ngFor="let verp of verpakkingen">
+          <mat-option value="{{verp}}">{{verp}}</mat-option>
+        </div>
+      </mat-select>
+      <mat-error *ngIf="form.get('verpakking').invalid">Gelieve een verpakking op te geven</mat-error>
     </mat-form-field>
+
+    <!-- <mat-form-field>
+      <input matInput type="text" formControlName="verpakking" placeholder="Verpakking product">
+      <mat-error *ngIf="form.get('verpakking').invalid">Gelieve een verpakking op te geven</mat-error>
+    </mat-form-field> -->
+
     <mat-form-field>
-      <input
-        matInput
-        type="text"
-        name="verpakking"
-        ngModel
-        required
-        placeholder="Verpakking product"
-        #verpakking="ngModel">
-      <mat-error *ngIf="verpakking.invalid">Geef een correcte verpakking op.</mat-error>
+      <input matInput type="number" formControlName="inhoud" placeholder="Inhoud product">
+      <mat-error *ngIf="form.get('inhoud').invalid">Gelieve een inhoud op te geven</mat-error>
     </mat-form-field>
+
     <mat-form-field>
-      <input
-        matInput
-        type="text"
-        name="inhoud"
-        ngModel
-        required
-        placeholder="Inhoud product"
-        #inhoud="ngModel">
-      <mat-error *ngIf="inhoud.invalid">Geef een correcte inhoud op.</mat-error>
+      <mat-label>Kies Categorie</mat-label>
+      <mat-select formControlName="categorie">
+        <div *ngFor="let cat of categories">
+          <mat-option value="{{cat}}">{{cat}}</mat-option>
+        </div>
+      </mat-select>
+      <mat-error *ngIf="form.get('categorie').invalid">Gelieve een categorie op te geven</mat-error>
     </mat-form-field>
-    <mat-form-field>
-      <input
-        matInput
-        type="text"
-        name="categorie"
-        ngModel
-        required
-        placeholder="Categorie product"
-        #categorie="ngModel">
-      <mat-error *ngIf="categorie.invalid">Geef een correcte categorie op.</mat-error>
-    </mat-form-field>
-    <button
-      mat-raised-button
-      color="accent"
-      type="submit">Opslaan Product</button>
+
+  <!--   <mat-form-field>
+      <input matInput type="text" formControlName="categorie" placeholder="Categorie product">
+      <mat-error *ngIf="form.get('categorie').invalid">Gelieve een categorie op te geven</mat-error>
+    </mat-form-field> -->
+    <button mat-raised-button color="accent" type="submit">Save Product</button>
   </form>
 </mat-card>

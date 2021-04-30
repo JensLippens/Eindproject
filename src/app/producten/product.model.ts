@@ -9,4 +9,5 @@ export interface Product {
   verpakking: string;
   inhoud: number;
   categorie: string;
+  imagePath: string;
 }
