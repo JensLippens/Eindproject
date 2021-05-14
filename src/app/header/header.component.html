@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<!-- <mat-toolbar color="primary">
   <span>Blush Beauty</span>
   <ul>
     <li>
@@ -10,18 +10,59 @@
   </ul>
   <span class="spacer"></span>
   <ul>
-<!--     <li *ngIf="userIsAuthenticated">
-      <a mat-button routerLink="/create" routerLinkActive="mat-accent">New Post</a>
-    </li> -->
     <li>
-      <a mat-button routerLink="/auth/login" routerLinkActive="mat-accent">Login</a>
+      <button mat-icon-button routerLink="/mandje" routerLinkActive="mat-accent"
+      matBadge="{{productenInMandje}}" matBadgePosition="after" matBadgeColor="warn" matBadgeSize="medium" [matBadgeHidden]="productenInMandje <= 0">
+      <mat-icon>shopping_cart</mat-icon></button>
     </li>
-    <li>
-      <a mat-button routerLink="/auth/signup" routerLinkActive="mat-accent">Signup</a>
+    <li *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a>
     </li>
-    <li>
-      <button mat-button>Logout</button>
+    <li *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink="/signup" routerLinkActive="mat-accent">Signup</a>
+    </li>
+    <li *ngIf="userIsAuthenticated">
+      <button mat-button (click)="onLogout()">Logout</button>
     </li>
   </ul>
+</mat-toolbar> -->
 
-</mat-toolbar>
+<div style="height: 80vh;">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Blush Beauty</span>
+      <div fxShow="true" fxHide.lt-md>
+          <a mat-button routerLink="/producten/list" routerLinkActive="mat-warn">Productenlijst</a>
+          <a mat-button routerLink="/producten/create" routerLinkActive="mat-accent">Nieuw product</a>
+      </div>
+          <span class="spacer"></span>
+      <div fxShow="true" fxHide.lt-md>
+          <button mat-icon-button routerLink="/mandje" routerLinkActive="mat-accent"
+          matBadge="{{productenInMandje}}" matBadgePosition="after" matBadgeColor="warn" matBadgeSize="medium" [matBadgeHidden]="productenInMandje <= 0">
+          <mat-icon>shopping_cart</mat-icon></button>
+          <a *ngIf="!userIsAuthenticated" mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a>
+          <a *ngIf="!userIsAuthenticated" mat-button routerLink="/signup" routerLinkActive="mat-accent">Signup</a>
+          <button *ngIf="userIsAuthenticated" mat-button (click)="onLogout()">Logout</button>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container fxFlexFill>
+    <mat-sidenav #sidenav>
+      <mat-nav-list>
+        <a (click)="sidenav.toggle()" mat-list-item routerLink="/producten/list" routerLinkActive="mat-warn" >Productenlijst</a>
+        <a (click)="sidenav.toggle()" mat-list-item routerLink="/producten/create" routerLinkActive="mat-accent">Nieuw product</a>
+        <button (click)="sidenav.toggle()" mat-icon-button routerLink="/mandje" routerLinkActive="mat-accent"
+        matBadge="{{productenInMandje}}" matBadgePosition="after" matBadgeColor="warn" matBadgeSize="medium" [matBadgeHidden]="productenInMandje <= 0">
+        <mat-icon>shopping_cart</mat-icon></button>
+        <a (click)="sidenav.toggle()" *ngIf="!userIsAuthenticated" mat-list-item routerLink="/login" routerLinkActive="mat-accent">Login</a>
+        <a (click)="sidenav.toggle()" *ngIf="!userIsAuthenticated" mat-list-item routerLink="/signup" routerLinkActive="mat-accent">Signup</a>
+        <button (click)="sidenav.toggle()" *ngIf="userIsAuthenticated" mat-list-item (click)="onLogout()">Logout</button>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill><router-outlet></router-outlet></mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

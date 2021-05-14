@@ -1,0 +1,83 @@
+button {
+  width: 370px;
+}
+.inhoud {
+  font-weight: bold;
+}
+mat-divider {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.custom-card.mat-card {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  width: 80%;
+  background-image: linear-gradient(lightgreen,yellow);
+}
+.text_right {
+  float: right;
+  font-size:large;
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
+.text_left {
+  float: left;
+  font-family: Montserrat;
+  font-style: normal!important;
+  font-size:xx-large;
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+input {
+  text-align: center;
+  border: 1px solid #6C757D;
+}
+
+input[type="number"] {
+  -webkit-appearance: textfield !important;
+  -moz-appearance: textfield !important;
+  appearance: textfield !important;
+}
+
+.wrapper {
+  border: 2px #000000 solid;
+  width: 10rem;
+  height: 50px;
+  padding: 0px;
+  display: flex;
+  margin: 0.5rem;
+  border-radius: 50px;
+}
+
+.plus {
+  align-items: center;
+  height: 50%;
+  width: 25%;
+  text-align: left;
+  background: white;
+  border: none;
+  font-size: 40px;
+  color: #5f5fce;
+  margin: 5px;
+}
+.minus {
+  align-items: center;
+  height: 50%;
+  width: 25%;
+  background: white;
+  text-align: right;
+  border: none;
+  font-size: 40px;
+  color: #5f5fce;
+  margin: 5px;
+  margin-left: 15px;
+}
+.num {
+  align-items: center;
+  height: 100%;
+  width: 50%;
+  border: none;
+  font-size: 30px;
+  margin-top: 5px;
+}

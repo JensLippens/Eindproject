@@ -1,0 +1,14 @@
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let mandjesItem of mandjesItems">
+    <mat-expansion-panel-header>
+      {{mandjesItem.product.naam}}
+    </mat-expansion-panel-header>
+    <div class="post-image">
+      <img [src]="mandjesItem.product.imagePath" [alt]="mandjesItem.product.naam">
+    </div>
+    <p>{{mandjesItem.aantal}}, € {{mandjesItem.product.prijs.toFixed(2)}}</p>
+    <p>{{(mandjesItem.product.prijs * mandjesItem.aantal).toFixed(2)}}</p>
+    <button mat-raised-button color="warn" (click)="verwijderItem(mandjesItem.product)">Verwijder Item</button>
+  </mat-expansion-panel>
+</mat-accordion>
+<button mat-raised-button color="warn" (click)="clearMandje()">Clear Mandje</button>

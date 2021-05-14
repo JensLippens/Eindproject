@@ -1,0 +1,19 @@
+<div fxFlex="35%" fxFlex.md="30%" fxFlex.sm="20%" fxFlex.xs="0%"></div>
+<mat-card fxFlex="30%" fxFlex.md="40%" fxFlex.sm="60%" fxFlex.xs="100%">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
+    <mat-form-field appearance="outline">
+      <input matInput name="email" type="email" placeholder="E-Mail" ngModel #emailInput="ngModel" required email>
+      <mat-error *ngIf="emailInput.invalid">Ongeldig emailadres.</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <input matInput name="password" type="password" placeholder="Password" ngModel #passwordInput="ngModel" required>
+      <mat-error *ngIf="passwordInput.invalid">Paswoord niet geldig</mat-error>
+    </mat-form-field>
+    <div fxLayoutAlign="space-between center">
+      <button mat-raised-button color="primary" type="submit" *ngIf="!isLoading">Login</button>
+      <a mat-raised-button color="accent" routerLink="/signup" routerLinkActive="mat-accent">Signup</a>
+    </div>
+  </form>
+</mat-card>
+<div fxFlex="35%" fxFlex.md="30%" fxFlex.sm="20%" fxFlex.xs="0%"></div>

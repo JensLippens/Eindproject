@@ -1,1 +1,30 @@
-<p>product-detail works!</p>
+<div class="flex-container" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="center">
+  <div fxFlex="5%" fxFlex.xs="0%" fxFlex.lt-sm="0%"></div>
+  <div class="flex-child" fxFlex="40%" fxFlex.xs="100%" fxFlex.lt-sm="100%" fxLayoutGap="16px grid">
+    <img mat-card-image [src]="product.imagePath" alt="product.naam">
+  </div>
+  <div fxFlex="10%" fxFlex.xs="0%" fxFlex.lt-sm="0%"></div>
+  <div class="flex-child" fxFlex="40%" fxFlex.xs="100%" fxFlex.sm="100%" fxLayoutGap="16px grid">
+    <h1> {{ product.naam}} </h1>
+    <mat-card class="custom-card">{{product.omschrijving}}</mat-card>
+    <mat-divider></mat-divider>
+    <p> Formaat: <span class="inhoud">{{ product.verpakking }} {{ product.inhoud}} ml</span></p>
+    <mat-divider></mat-divider>
+    <h2> {{ product.categorie}} </h2>
+    <div class="wrapper">
+      <button class="minus" (click)="handleMinus()">-</button>
+      <input type="number" #aantalInMandje class="num" min="0" value="1" oninput="validity.valid||(value='');" [(ngModel)]="value" />
+      <button class="plus" (click)="handlePlus()">+</button>
+    </div>
+    <button mat-raised-button color="accent" (click)="legInMandje(product, aantalInMandje.value)">
+      <span class="text_left ">€ {{(product.prijs * +aantalInMandje.value).toFixed(2)}} </span>
+      <span class="spacer"></span>
+      <span class="text_right">IN MANDJE</span>
+    </button>
+  </div>
+  <div fxFlex="5%" fxFlex.xs="0%" fxFlex.lt-sm="0%"></div>
+</div>
+
+
+
+

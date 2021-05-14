@@ -6,7 +6,7 @@
     </mat-expansion-panel-header>
     <mat-form-field hintLabel="niet hoofdlettergevoelig" appearance="outline" class="searchBox">
       <mat-label>Zoekterm</mat-label>
-      <input matInput type="text" #filterNaam placeholder="Naam product">
+      <input matInput type="text" #filterNaam placeholder="Naam product" >
     </mat-form-field>
     <!-- <input matInput type="text" #filterNaam placeholder="Naam product"> -->
   </mat-expansion-panel>
@@ -66,6 +66,6 @@
   <button
     mat-raised-button
     color="primary"
-    (click)="filterProducten(filterNaam.value, prijsMin.value, prijsMax.value, selectedCat)"
+    (click)="filterProducten(filterNaam.value, prijsMin.value, prijsMax.value, inhoudMin.value, inhoudMax.value, selectedCat)"
   >Pas filters toe</button>
 </div>

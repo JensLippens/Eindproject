@@ -9,7 +9,4 @@ export class CatEnVerpService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers = () => {
-    return this.http.get('https://exciting-imaginary-hat.glitch.me/users');
-  }
 }

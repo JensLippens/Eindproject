@@ -49,6 +49,7 @@ export class ProductCreateComponent implements OnInit {
         this.productId = paramMap.get('productId');
         this.isLoading = true;
         this.productService.getProduct(this.productId).subscribe(productData => {
+          console.log(productData);
           this.isLoading = false;
           this.product = {
             id: productData._id,
@@ -67,10 +68,11 @@ export class ProductCreateComponent implements OnInit {
             verpakking: this.product.verpakking,
             inhoud: this.product.inhoud,
             categorie: this.product.categorie,
-            imagepath: this.product.imagePath,
+            image: this.product.imagePath,
           });
         });
       } else {
+        console.log("add");
         this.mode = 'create';
         this.productId = null;
       }
