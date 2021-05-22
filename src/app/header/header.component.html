@@ -36,8 +36,9 @@
       <span>Blush Beauty</span>
       <div fxShow="true" fxHide.lt-md>
           <a mat-button routerLink="/producten/list" routerLinkActive="mat-warn">Productenlijst</a>
-          <a mat-button routerLink="/producten/create" routerLinkActive="mat-accent">Nieuw product</a>
-      </div>
+          <a *ngIf="userIsAuthenticated && user?.isAdmin" mat-button routerLink="/producten/create" routerLinkActive="mat-accent">Nieuw product</a>
+          <a *ngIf="userIsAuthenticated && user?.isAdmin" mat-button routerLink="/bestellingen/list" routerLinkActive="mat-accent">Bekijk orders</a>
+        </div>
           <span class="spacer"></span>
       <div fxShow="true" fxHide.lt-md>
           <button mat-icon-button routerLink="/mandje" routerLinkActive="mat-accent"
@@ -45,6 +46,7 @@
           <mat-icon>shopping_cart</mat-icon></button>
           <a *ngIf="!userIsAuthenticated" mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a>
           <a *ngIf="!userIsAuthenticated" mat-button routerLink="/signup" routerLinkActive="mat-accent">Signup</a>
+          <a *ngIf="userIsAuthenticated" mat-button routerLink="/updateuserdata" routerLinkActive="mat-accent">Gegevens bijwerken</a>
           <button *ngIf="userIsAuthenticated" mat-button (click)="onLogout()">Logout</button>
       </div>
     </mat-toolbar-row>
@@ -54,12 +56,13 @@
     <mat-sidenav #sidenav>
       <mat-nav-list>
         <a (click)="sidenav.toggle()" mat-list-item routerLink="/producten/list" routerLinkActive="mat-warn" >Productenlijst</a>
-        <a (click)="sidenav.toggle()" mat-list-item routerLink="/producten/create" routerLinkActive="mat-accent">Nieuw product</a>
+        <a *ngIf="userIsAuthenticated && user?.isAdmin" (click)="sidenav.toggle()" mat-list-item routerLink="/producten/create" routerLinkActive="mat-accent">Nieuw product</a>
         <button (click)="sidenav.toggle()" mat-icon-button routerLink="/mandje" routerLinkActive="mat-accent"
         matBadge="{{productenInMandje}}" matBadgePosition="after" matBadgeColor="warn" matBadgeSize="medium" [matBadgeHidden]="productenInMandje <= 0">
         <mat-icon>shopping_cart</mat-icon></button>
         <a (click)="sidenav.toggle()" *ngIf="!userIsAuthenticated" mat-list-item routerLink="/login" routerLinkActive="mat-accent">Login</a>
         <a (click)="sidenav.toggle()" *ngIf="!userIsAuthenticated" mat-list-item routerLink="/signup" routerLinkActive="mat-accent">Signup</a>
+        <a (click)="sidenav.toggle()" *ngIf="userIsAuthenticated" mat-list-item routerLink="/updateuserdata" routerLinkActive="mat-accent">Gegevens bijwerken</a>
         <button (click)="sidenav.toggle()" *ngIf="userIsAuthenticated" mat-list-item (click)="onLogout()">Logout</button>
       </mat-nav-list>
     </mat-sidenav>

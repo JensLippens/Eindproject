@@ -1,0 +1,39 @@
+<div fxLayoutAlign="center center">
+
+  <mat-card fxFlex="80" fxFlex.lt-md="100">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <form [formGroup]="form" (submit)="onUpdate()" #signupForm="ngForm" *ngIf="!isLoading">
+      <div class="flex-container" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-evenly">
+        <div class="flex-child " fxFlex="60%"  fxFlex.lt-md="100" fxLayoutGap="16px grid">
+          <mat-form-field appearance="fill">
+            <input matInput formControlName="naam" type="text" placeholder="Naam" required>
+            <mat-error *ngIf="form.get('naam').invalid">Gelieve uw naam in te vullen.</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <input matInput formControlName="voornaam" type="text" placeholder="Voornaam" required>
+            <mat-error *ngIf="form.get('voornaam').invalid">Gelieve uw voornaam in te vullen.</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <input matInput formControlName="straat" type="text" placeholder="Straat" required>
+            <mat-error *ngIf="form.get('straat').invalid">Gelieve uw straat in te vullen.</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <input matInput formControlName="huisnummer" type="number" min="1" placeholder="Nr" required>
+            <mat-error *ngIf="form.get('huisnummer').invalid">Gelieve uw huisnummer in te vullen.</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <input matInput formControlName="gemeente" type="text" placeholder="Gemeente" required>
+            <mat-error *ngIf="form.get('gemeente').invalid">Gelieve uw gemeente in te vullen.</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <input matInput formControlName="telefoon"  type="text" placeholder="Telefoon/GSM"  required>
+            <mat-error *ngIf="form.get('telefoon').invalid">Gelieve uw telefoon- of GSM-nummer in te vullen.</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="flex-child " fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutGap="16px grid">
+          <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">Update gegevens</button>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+  </div>

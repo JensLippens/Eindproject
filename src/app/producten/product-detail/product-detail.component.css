@@ -55,29 +55,35 @@ input[type="number"] {
   height: 50%;
   width: 25%;
   text-align: left;
-  background: white;
+  background: transparent;
   border: none;
   font-size: 40px;
   color: #5f5fce;
   margin: 5px;
+  /* cursor: pointer; */
 }
 .minus {
   align-items: center;
   height: 50%;
   width: 25%;
-  background: white;
+  background: transparent;
   text-align: right;
   border: none;
   font-size: 40px;
   color: #5f5fce;
   margin: 5px;
   margin-left: 15px;
+  /* cursor: pointer; */
 }
 .num {
   align-items: center;
   height: 100%;
   width: 50%;
+  background: transparent;
   border: none;
   font-size: 30px;
   margin-top: 5px;
+}
+.omschrijving {
+  white-space: pre-wrap;
 }

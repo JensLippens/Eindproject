@@ -34,7 +34,6 @@ export class ProductDetailComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.productId = paramMap.get('productId');
       this.productService.getProduct(this.productId).subscribe(fetchedProduct => {
-        console.log(fetchedProduct);
         this.product = {
           id: fetchedProduct._id,
           naam: fetchedProduct.naam,

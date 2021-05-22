@@ -5,6 +5,9 @@ import { Router } from "@angular/router";
 
 import { Product } from '../producten/product.model';
 import { OrderItem } from './orderitem.model';
+import { ProductFilterComponent } from '../producten/product-filter/product-filter.component';
+import { AuthData } from '../auth/auth-data.model';
+import { Bestelling } from '../bestelling/bestelling.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,13 +34,26 @@ export class MandjeService {
     return this.mandjeUpdatedCount.asObservable();
   }
 
+  getPrijsZonderBtw(){
+    let totaalprijs = 0;
+    for (let i = 0; i < this.mandje.length; i++) {
+      totaalprijs += this.mandje[i].product.prijs * this.mandje[i].aantal;
+    }
+    return totaalprijs;
+  }
+
   getAantalProductenInMandje() {
     let aantal = 0;
     for (let i = 0; i < this.mandje.length; i++) {
       aantal += this.mandje[i].aantal;
-      console.log(this.mandje[i].aantal);
     }
     return aantal;
+  }
+
+  updateAantalInMandje(product: Product, nieuwAantal: number){
+    const index = this.mandje.findIndex(item => item.product.id == product.id);
+    this.mandje[index].aantal = +nieuwAantal;
+    this.updateStorageEnSubjects();
   }
 
   voegOrderItemToe(product: Product, aantal: number) {
@@ -49,13 +65,15 @@ export class MandjeService {
     else {
       this.mandje[checkProductInMandje].aantal += aantal;
     }
-    this.saveMandje(this.mandje);
-    this.mandjeUpdatedCount.next(this.getAantalProductenInMandje());
-    this.mandjeUpdatedItems.next(this.mandje);
+    this.updateStorageEnSubjects();
   }
 
   verwijderOrderItem(product: Product) {
     this.mandje = this.mandje.filter(item => item.product.id != product.id);
+    this.updateStorageEnSubjects();
+  }
+
+  updateStorageEnSubjects() {
     this.saveMandje(this.mandje);
     this.mandjeUpdatedCount.next(this.getAantalProductenInMandje());
     this.mandjeUpdatedItems.next(this.mandje);
@@ -89,4 +107,14 @@ export class MandjeService {
       mandje: JSON.parse(mandje),
     }
   }
+
+  kiesRouteOpBasisVanMandje() {
+    if (this.mandje.length <= 0) {
+      this.router.navigate(["/"]);
+    }
+    else {
+      this.router.navigate(["/checkout"]);
+    }
+  }
+  //
 }

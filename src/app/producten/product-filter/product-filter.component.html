@@ -45,27 +45,39 @@
     <mat-expansion-panel-header>
       Categorie
     </mat-expansion-panel-header>
-    <mat-label>Kies Categorie</mat-label>
+    <!-- <mat-label>Kies Categorieën</mat-label> -->
     <mat-selection-list #lijstCategorie>
       <mat-list-option
         *ngFor="let cat of categories"
         [value]="cat"
         [selected]="cat"
-        (click)="onListChanged(lijstCategorie)">
+        (click)="onCatListChanged(lijstCategorie)">
           {{cat}}
       </mat-list-option>
      </mat-selection-list>
-    <!-- <mat-select #zoekCategorie>
-      <div *ngFor="let cat of categories">
-        <mat-option value="{{cat}}">{{cat}}</mat-option>
-      </div>
-    </mat-select> -->
   </mat-expansion-panel>
+
+  <mat-expansion-panel >
+    <mat-expansion-panel-header>
+      Verpakking
+    </mat-expansion-panel-header>
+    <!-- <mat-label>Kies Verpakkingen</mat-label> -->
+    <mat-selection-list #lijstVerpakkingen>
+      <mat-list-option
+        *ngFor="let verp of verpakkingen"
+        [value]="verp"
+        [selected]="verp"
+        (click)="onVerpListChanged(lijstVerpakkingen)">
+          {{verp}}
+      </mat-list-option>
+     </mat-selection-list>
+  </mat-expansion-panel>
+
 </mat-accordion>
 <div>
   <button
     mat-raised-button
     color="primary"
-    (click)="filterProducten(filterNaam.value, prijsMin.value, prijsMax.value, inhoudMin.value, inhoudMax.value, selectedCat)"
+    (click)="filterProducten(filterNaam.value, prijsMin.value, prijsMax.value, inhoudMin.value, inhoudMax.value, selectedCat, selectedVerp)"
   >Pas filters toe</button>
 </div>

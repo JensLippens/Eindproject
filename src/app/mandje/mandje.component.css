@@ -1,0 +1,42 @@
+img{
+  max-width: 100%;
+  max-height: 100%;
+  display: block; /* remove extra space below image */
+}
+input[type="number"] {
+  -webkit-appearance: textfield !important;
+  -moz-appearance: textfield !important;
+  appearance: textfield !important;
+}
+.mat-card {
+  margin: 0.5rem;
+  border: 2px solid gray;
+  border-radius: 50px;
+}
+button {
+  height: 50px;
+}
+.prijs{
+  border-left: 6px solid #ccc!important;
+  border-color: #2196F3!important;
+  background-color: lightblue;
+  padding: 1rem;
+  margin: 0.5rem;
+}
+.num {
+  background-color:lightgray;
+  text-align: center;
+  height: 50px;
+  width: 50px;
+  border: none;
+  font-size: 30px;
+}
+.wordbreak{
+  white-space: nowrap;
+  max-width: 325px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+}
+#subtotaal{
+  margin-right: 2rem;
+}

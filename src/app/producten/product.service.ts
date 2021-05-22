@@ -5,15 +5,16 @@ import { map } from 'rxjs/operators';
 import { Router } from "@angular/router";
 
 import { Product } from "./product.model";
-import { Verpakking } from './enums/verpakking';
-import { Categorie } from './enums/categorie';
+import { environment } from "../../environments/environment";
+
+const BACKEND_URL = environment.apiUrl + "/producten/";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  verpakkingen: string[] = ["pot", "tube", "flacon"];
-  categories: string[] = ["gelaat", "haar", "douche", "makeup", "parfum"];
+  verpakkingen: string[] = ["Pot", "Tube", "Flacon", "Verstuiver"];
+  categories: string[] = ["Gelaat", "Haar", "Douche", "Makeup", "Parfum"];
 
   private producten: Product[] = [];
   private productUpdated = new Subject<Product[]>();
@@ -22,7 +23,7 @@ export class ProductService {
 
   getProducten() {
     this.http
-      .get<{ message: string; producten: any }>("http://localhost:3000/api/producten")
+      .get<{ message: string; producten: any }>(BACKEND_URL)
       .pipe(
         map(data => {
           return data.producten.map(product => {
@@ -60,7 +61,7 @@ export class ProductService {
       categorie: string,
       imagePath: string,
     }>(
-      "http://localhost:3000/api/producten/" + id
+      BACKEND_URL + id
     );
   }
 
@@ -81,22 +82,10 @@ export class ProductService {
     productData.append("image", image, naam);
     this.http
       .post<{ message: string, product: Product }>(
-        "http://localhost:3000/api/producten/",
+        BACKEND_URL,
         productData
       )
       .subscribe(responseData => {
-       /*  const product: Product = {
-          id: responseData.product.id,
-          naam: naam,
-          omschrijving: omschrijving,
-          prijs: prijs,
-          verpakking: verpakking,
-          inhoud: inhoud,
-          categorie: categorie,
-          imagePath: responseData.product.imagePath
-        };
-        this.producten.push(product);
-        this.productUpdated.next([...this.producten]); */
         this.router.navigate(["/"]);
       });
   }
@@ -133,34 +122,14 @@ export class ProductService {
       };
     }
     this.http
-      .put("http://localhost:3000/api/producten/" + id, productData)
+      .put(BACKEND_URL + id, productData)
       .subscribe(responseData => {
-        /* const updatedProducten = [...this.producten];
-        const oldProductIndex = updatedProducten.findIndex(p => p.id === id);
-        const product: Product = {
-          id: id,
-          naam: naam,
-          omschrijving: omschrijving,
-          prijs: prijs,
-          verpakking: verpakking,
-          inhoud: inhoud,
-          categorie: categorie,
-          imagePath: ""
-        };
-        updatedProducten[oldProductIndex] = product;
-        this.producten = updatedProducten;
-        this.productUpdated.next([...this.producten]); */
         this.router.navigate(["/"]);
       });
   }
 
   deleteProduct(productId: string) {
     return this.http
-      .delete("http://localhost:3000/api/producten/" + productId);
-    /*   .subscribe(() => {
-        const gefilterdeProducten = this.producten.filter(product => product.id !== productId);
-        this.producten = gefilterdeProducten;
-        this.productUpdated.next([...this.producten]);
-      }); */
+      .delete(BACKEND_URL + productId);
   }
 }

@@ -1,0 +1,115 @@
+<div fxLayout="row wrap" fxLayout.lt-sm="column" >
+  <div class="klant" fxFlex="20%" fxFlex.md="40%" fxFlex.lt-md="100%">
+    <h3 class="">Klantgegevens</h3>
+    <h4>Naam: {{user.naam}}</h4>
+    <h4>Voornaam: {{user.voornaam}}</h4>
+    <h4>Telefoon: {{user.telefoon}}</h4>
+    <h4>E-mail: {{user.email}}</h4>
+  </div>
+  <div class="adres" fxFlex="20%" fxFlex.md="40%" fxFlex.lt-md="100%">
+    <h3 class="">Adresgegevens</h3>
+    <h4>{{user.straat}} {{user.huisnummer}}</h4>
+    <h4>{{user.gemeente}}</h4>
+  </div>
+  <div fxFlex="55%" fxFlex.lt-md="100%" >
+
+    <table mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="productnaam">
+        <th mat-header-cell *matHeaderCellDef> Productnaam </th>
+        <td mat-cell *matCellDef="let orderItem"> {{orderItem.product.naam}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="eenheidsprijs">
+        <th mat-header-cell *matHeaderCellDef> Prijs </th>
+        <td mat-cell *matCellDef="let orderItem"> {{orderItem.product.prijs | currency:'EUR':"symbol"}} </td>
+        <td mat-footer-cell *matFooterCellDef>Totaalprijs</td>
+      </ng-container>
+
+      <ng-container matColumnDef="aantal">
+        <th mat-header-cell *matHeaderCellDef> Aantal </th>
+        <td mat-cell *matCellDef="let orderItem"> x{{orderItem.aantal}} </td>
+        <td mat-footer-cell *matFooterCellDef> zonder BTW </td>
+      </ng-container>
+
+      <ng-container matColumnDef="subtotaal">
+        <th mat-header-cell *matHeaderCellDef> Subtotaal </th>
+        <td mat-cell *matCellDef="let orderItem"> {{orderItem.aantal * orderItem.product.prijs | currency:'EUR':"symbol" }} </td>
+        <td mat-footer-cell *matFooterCellDef> {{totaalPrijs / 1.21 | currency:'EUR':"symbol"}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="span">
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+      <ng-container matColumnDef="tweedeFooterTotaalPrijs">
+        <td mat-footer-cell *matFooterCellDef>Totaalprijs</td>
+      </ng-container>
+      <ng-container matColumnDef="tweedeFooterMetBtw">
+        <td mat-footer-cell *matFooterCellDef> met 21% BTW </td>
+      </ng-container>
+      <ng-container matColumnDef="tweedeFooterPrijsMetBtw">
+        <td mat-footer-cell *matFooterCellDef> {{totaalPrijs | currency:'EUR':"symbol"}}  </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-footer-row *matFooterRowDef="['span','tweedeFooterTotaalPrijs', 'tweedeFooterMetBtw', 'tweedeFooterPrijsMetBtw']; sticky: true"></tr>
+
+    </table>
+  </div>
+</div>
+<button mat-raised-button color="primary" type="submit" (click)="plaatsBestelling()">Plaats bestelling van {{totaalPrijs | currency:'EUR':"symbol"}}</button>
+
+
+
+
+<!-- <div fxLayoutAlign="center">
+  <mat-card fxFlex="30%" fxFlex.md="40%" fxFlex.sm="60%" fxFlex.xs="100%">
+   <form #signupForm="ngForm" >
+      <mat-form-field appearance="outline">
+        <mat-label>Kaarthouder</mat-label>
+        <input matInput name="kaartHouder" ngModel type="text" #kaartHouderInput="ngModel" >
+        <mat-error *ngIf="kaartHouderInput.invalid">Gelieve de kaarthouder in te vullen.</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Kredietkaartnummer</mat-label>
+        <input matInput name="kredietKaartNummer" ngModel type="text" #kredietKaartNummerInput="ngModel" >
+        <mat-error *ngIf="kredietKaartNummerInput.invalid">Gelieve uw kredietkaartnummer in te vullen.</mat-error>
+      </mat-form-field>
+      <mat-form-field class="vervaldata" appearance="outline">
+        <mat-label>Vervalmaand</mat-label>
+        <input matInput name="vervalMaand" ngModel type="text" #vervalMaandInput="ngModel" >
+        <mat-error *ngIf="vervalMaandInput.invalid">Gelieve de vervalmaand in te vullen.</mat-error>
+      </mat-form-field>
+      <mat-form-field class="vervaldata" appearance="outline">
+        <mat-label>Vervaljaar</mat-label>
+        <input matInput name="vervalJaar" ngModel type="text" #vervalJaarInput="ngModel" >
+        <mat-error *ngIf="vervalJaarInput.invalid">Gelieve het vervaljaar in te vullen.</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>CVC-code</mat-label>
+        <input matInput name="cvcCode" ngModel type="text" #cvcCodeInput="ngModel" >
+        <mat-error *ngIf="cvcCodeInput.invalid">Gelieve uw gemeente in te vullen.</mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" (click)="makePayment(totaalPrijs.toFixed(2))">Bevesting betaling: € {{totaalPrijs.toFixed(2)}}</button>
+    </form>
+  </mat-card>
+</div> -->
+
+<!-- <script src="https://js.stripe.com/v3/"></script> -->
+
+<!-- <div class="container">
+  <h2 class="mt-5 mb-4">Angular Stripe Checkout Example</h2>
+
+  <div class="col-md-5 mb-2">
+    <button (click)="makePayment(15)" class="btn btn-danger btn-block">Pay $15</button>
+  </div>
+  <div class="col-md-5 mb-2">
+    <button (click)="makePayment(25)" class="btn btn-primary btn-block">Pay $25</button>
+  </div>
+  <div class="col-md-5">
+    <button (click)="makePayment(35)" class="btn btn-success btn-block">Pay $35</button>
+  </div>
+</div> -->

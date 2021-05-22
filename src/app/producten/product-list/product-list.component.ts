@@ -14,6 +14,7 @@ import { MandjeService } from 'src/app/mandje/mandje.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit, OnDestroy {
+  value = 1;
   catalogus: Product[] = [];
   gefilterdeProducten: Product[] = [];
   isLoading = false;
@@ -43,10 +44,20 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.authStatusSub = this.authService
       .getAuthStatusListener()
       .subscribe(isAuthenticated => {
+        this.isLoading = false;
         this.userIsAuthenticated = isAuthenticated;
         this.user = this.authService.getUser();
       });
   }
+
+/*   handleMinus() {
+    if (this.value > 1){
+      this.value--;
+    }
+  }
+  handlePlus() {
+    this.value++;
+  } */
 
   filterProducten(nieuweProductFilter: Product[]) {
     this.gefilterdeProducten = nieuweProductFilter;
@@ -57,11 +68,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.productService.deleteProduct(productId)
       .subscribe(() => {
         this.productService.getProducten();
+      }, () => {
+        this.isLoading = false;
       });
   }
 
   legInMandje(product: Product, aantal: number){
-    this.mandjeService.voegOrderItemToe(product, aantal);
+    this.mandjeService.voegOrderItemToe(product, +aantal);
   }
 
   ngOnDestroy() {

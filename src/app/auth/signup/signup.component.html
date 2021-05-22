@@ -1,22 +1,24 @@
-<mat-card>
+<div fxLayoutAlign="center center">
+
+<mat-card fxFlex="80" fxFlex.lt-md="100">
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading">
     <div class="flex-container" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-evenly">
-      <div class="flex-child " fxFlex="40%" fxFlex.xs="100%" fxFlex.lt-sm="100%" fxLayoutGap="16px grid">
-        <mat-form-field appearance="fill">
-          <input matInput name="voornaam" ngModel type="text" placeholder="Voornaam" #voornaamInput="ngModel" required>
-          <mat-error *ngIf="voornaamInput.invalid">Gelieve uw voornaam in te vullen.</mat-error>
-        </mat-form-field>
+      <div class="flex-child " fxFlex="40%" fxFlex.xs="100%" fxFlex.lt-sm="50%" fxLayoutGap="16px grid">
         <mat-form-field appearance="fill">
           <input matInput name="naam" ngModel type="text" placeholder="Naam" #naamInput="ngModel" required>
           <mat-error *ngIf="naamInput.invalid">Gelieve uw naam in te vullen.</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <input matInput name="voornaam" ngModel type="text" placeholder="Voornaam" #voornaamInput="ngModel" required>
+          <mat-error *ngIf="voornaamInput.invalid">Gelieve uw voornaam in te vullen.</mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
           <input matInput name="straat" ngModel type="text" placeholder="Straat" #straatInput="ngModel" required>
           <mat-error *ngIf="straatInput.invalid">Gelieve uw straat in te vullen.</mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
-          <input matInput name="huisnummer" ngModel type="number" placeholder="Nr" #huisnummerInput="ngModel" required>
+          <input matInput name="huisnummer" ngModel type="number" min="1" placeholder="Nr" #huisnummerInput="ngModel" required>
           <mat-error *ngIf="huisnummerInput.invalid">Gelieve uw huisnummer in te vullen.</mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
@@ -34,11 +36,16 @@
           <mat-error *ngIf="emailInput.invalid">Please enter a valid email.</mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
-          <input type="password" name="password" ngModel matInput placeholder="Password" #passwordInput="ngModel" required>
+          <input type="password" name="password" ngModel matInput placeholder="Paswoord" #passwordInput="ngModel" required>
           <mat-error *ngIf="passwordInput.invalid">Please enter a valid password.</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <input type="password" name="validatiePassword" ngModel matInput
+            placeholder="Herhaal paswoord" #validatiePasswordInput="ngModel" required  id="confirm_password">
         </mat-form-field>
         <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">Signup</button>
       </div>
     </div>
   </form>
 </mat-card>
+</div>

@@ -5,3 +5,8 @@ mat-form-field {
 mat-spinner {
   margin: auto;
 }
+
+button {
+  height: 40px;
+  margin: auto;
+}

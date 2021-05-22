@@ -7,7 +7,7 @@
 li {
   margin: 0.5rem;
 }
- */
+*/
  .mat-sidenav-container {
   height: 100px;
 }
@@ -21,13 +21,3 @@ a {
   flex: 1 1 auto;
 }
 
-.menu-spacer {
-  flex: 1 1 auto;
-}
-
-.header-left{
-  float: left;
-}
-.header-right {
-  align-self:flex-end
-}

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 
 import { Product } from '../product.model';
 import { ProductService} from "../product.service";
@@ -11,9 +13,7 @@ import { mimeType } from "./mime-type.validator";
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.css']
 })
-export class ProductCreateComponent implements OnInit {
-  // enteredTitle = "";
-  // enteredContent = "";
+export class ProductCreateComponent implements OnInit, OnDestroy {
   categories: string[];
   verpakkingen: string[];
   product: Product;
@@ -22,13 +22,20 @@ export class ProductCreateComponent implements OnInit {
   imagePreview: string;
   private mode = 'create';
   private productId: string;
+  private authStatusSub: Subscription
 
   constructor(
     public productService: ProductService,
     public route: ActivatedRoute,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
+    this.authStatusSub = this.authService
+    .getAuthStatusListener()
+    .subscribe(authStatus => {
+        this.isLoading = false;
+    });
     this.categories = this.productService.categories;
     this.verpakkingen = this.productService.verpakkingen;
     this.form = new FormGroup({
@@ -49,7 +56,7 @@ export class ProductCreateComponent implements OnInit {
         this.productId = paramMap.get('productId');
         this.isLoading = true;
         this.productService.getProduct(this.productId).subscribe(productData => {
-          console.log(productData);
+          // console.log(productData);
           this.isLoading = false;
           this.product = {
             id: productData._id,
@@ -72,7 +79,6 @@ export class ProductCreateComponent implements OnInit {
           });
         });
       } else {
-        console.log("add");
         this.mode = 'create';
         this.productId = null;
       }
@@ -118,5 +124,9 @@ export class ProductCreateComponent implements OnInit {
         );
       }
     this.form.reset();
+  }
+
+  ngOnDestroy() {
+    this.authStatusSub.unsubscribe();
   }
 }

@@ -1,14 +1,33 @@
-<mat-accordion>
-  <mat-expansion-panel *ngFor="let mandjesItem of mandjesItems">
-    <mat-expansion-panel-header>
-      {{mandjesItem.product.naam}}
-    </mat-expansion-panel-header>
-    <div class="post-image">
-      <img [src]="mandjesItem.product.imagePath" [alt]="mandjesItem.product.naam">
-    </div>
-    <p>{{mandjesItem.aantal}}, € {{mandjesItem.product.prijs.toFixed(2)}}</p>
-    <p>{{(mandjesItem.product.prijs * mandjesItem.aantal).toFixed(2)}}</p>
-    <button mat-raised-button color="warn" (click)="verwijderItem(mandjesItem.product)">Verwijder Item</button>
-  </mat-expansion-panel>
-</mat-accordion>
-<button mat-raised-button color="warn" (click)="clearMandje()">Clear Mandje</button>
+<!-- <div fxFlex="1"></div> -->
+<div class="flex-container" fxLayout="row" fxLayout.lt-md="column">
+<div class="flex-child " fxLayout="column" fxFlex="75" fxFlex.sm="100%" fxFlex.xs="100%">
+  <mat-card *ngFor="let mandjesItem of mandjesItems" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-around center" >
+      <img [src]="mandjesItem.product.imagePath" [alt]="mandjesItem.product.naam" fxFlex="225px">
+
+      <div >
+        <a mat-button color="primary" [routerLink]="['/producten/product', mandjesItem.product.id]">
+          <h3 class="wordbreak">{{mandjesItem.product.naam}}</h3>
+        </a>
+        <h4> Formaat: <span class="inhoud">{{ mandjesItem.product.verpakking }} {{ mandjesItem.product.inhoud}} ml</span></h4>
+        <h4> Prijs: € {{mandjesItem.product.prijs}}</h4>
+      </div>
+
+      <input matInput type="number" #aantalInMandje class="num" min="1" value="{{mandjesItem.aantal}}"
+        placeholder="{{mandjesItem.aantal}}" oninput="validity.valid||(value='');"
+        (change)="updateAantal(mandjesItem.product, aantalInMandje.value)"/>
+      <div fxLayout="column" fxLayout.lt-md="row" fxLayoutAlign.lt-md="space-between center">
+        <h2 id="subtotaal">{{mandjesItem.product.prijs * mandjesItem.aantal | currency:'EUR':"symbol"}}</h2>
+    <!-- <button mat-raised-button color="warn" (click)="verwijderItem(mandjesItem.product)">Verwijder Item</button> -->
+        <button class="delete-button" mat-fab color="warn" (click)="verwijderItem(mandjesItem.product)"><mat-icon>delete</mat-icon></button>
+      </div>
+  </mat-card>
+</div>
+<div class="flex-child " fxFlex="25">
+  <h3 class="prijs">Totaal exclusief BTW: {{prijsZonderBtw | currency:'EUR':"symbol"}}</h3>
+  <h3 class="prijs">BTW (21%): {{(prijsZonderBtw * 0.21) | currency:'EUR':"symbol"}}</h3>
+  <h2 class="prijs">Eindtotaal: {{(prijsZonderBtw *1.21) | currency:'EUR':"symbol"}}</h2>
+  <button  mat-raised-button color="accent" (click)="checkLeegMandjeVoorRoute()">Checkout</button>
+</div>
+</div>
+<!-- <div fxFlex="1"></div> -->
+

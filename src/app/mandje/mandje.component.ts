@@ -14,28 +14,35 @@ import { MandjeService } from './mandje.service';
 })
 export class MandjeComponent implements OnInit {
   mandjesItems: OrderItem[] = []
-  userIsAuthenticated = false;
-  private authListenerSubs: Subscription;
+  prijsZonderBtw: number;
   private mandjeItemsListenerSubs: Subscription;
+  // userIsAuthenticated = false;
+  // private authListenerSubs: Subscription;
 
   constructor(
-    private authService: AuthService,
-    private mandjeService: MandjeService
+    // private authService: AuthService,
+    private mandjeService: MandjeService,
   ) { }
 
   ngOnInit(): void {
+    this.prijsZonderBtw = this.mandjeService.getPrijsZonderBtw()
     this.mandjesItems = this.mandjeService.getMandje();
-    this.userIsAuthenticated = this.authService.getIsAuth();
-    this.authListenerSubs = this.authService
-      .getAuthStatusListener()
-      .subscribe(isAuthenticated => {
-        this.userIsAuthenticated = isAuthenticated;
-      });
     this.mandjeItemsListenerSubs = this.mandjeService
       .getMandjeItemsUpdateListener()
       .subscribe(mandje => {
         this.mandjesItems = mandje;
+        this.prijsZonderBtw = this.mandjeService.getPrijsZonderBtw();
       });
+    /* this.userIsAuthenticated = this.authService.getIsAuth();
+    this.authListenerSubs = this.authService
+      .getAuthStatusListener()
+      .subscribe(isAuthenticated => {
+        this.userIsAuthenticated = isAuthenticated;
+      }); */
+  }
+
+  updateAantal(product: Product, nieuwAantal: number) {
+    this.mandjeService.updateAantalInMandje(product, nieuwAantal);
   }
 
   verwijderItem(product: Product) {
@@ -46,8 +53,11 @@ export class MandjeComponent implements OnInit {
     this.mandjeService.clearMandje();
   }
   ngOnDestroy() {
-    this.authListenerSubs.unsubscribe();
     this.mandjeItemsListenerSubs.unsubscribe();
+    // this.authListenerSubs.unsubscribe();
+  }
+  checkLeegMandjeVoorRoute() {
+    this.mandjeService.kiesRouteOpBasisVanMandje();
   }
 
 }
