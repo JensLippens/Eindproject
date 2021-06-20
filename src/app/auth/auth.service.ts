@@ -84,7 +84,7 @@ export class AuthService {
       telefoon: telefoon,
       email: email,
       password: password,
-      isAdmin: false
+      isAdmin: this.user.isAdmin,
     }
     this.http
     .put(BACKEND_URL + "signup/" + userId, updateData)

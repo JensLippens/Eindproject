@@ -50,15 +50,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
       });
   }
 
-/*   handleMinus() {
-    if (this.value > 1){
-      this.value--;
-    }
-  }
-  handlePlus() {
-    this.value++;
-  } */
-
   filterProducten(nieuweProductFilter: Product[]) {
     this.gefilterdeProducten = nieuweProductFilter;
   }

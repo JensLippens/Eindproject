@@ -11,6 +11,7 @@ exports.nieuwProduct = (req, res, next) => {
     categorie: req.body.categorie,
     imagePath: url + "/images/" + req.file.filename
   });
+  console.log(product);
   product.save().then(nieuwProduct => {
     res.status(201).json({
       message: "Product toegevoegd",

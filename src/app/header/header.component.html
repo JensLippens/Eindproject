@@ -66,6 +66,8 @@
         <button (click)="sidenav.toggle()" *ngIf="userIsAuthenticated" mat-list-item (click)="onLogout()">Logout</button>
       </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content fxFlexFill><router-outlet></router-outlet></mat-sidenav-content>
+    <mat-sidenav-content fxFlexFill>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

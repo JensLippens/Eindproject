@@ -1,6 +1,3 @@
-import { Categorie } from "./enums/categorie";
-import { Verpakking } from "./enums/verpakking";
-
 export interface Product {
   id: string;
   naam: string;

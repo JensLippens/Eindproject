@@ -75,18 +75,5 @@ export class ProductFilterComponent implements OnInit {
     }
 
     this.nieuwFilterEvent.emit(this.gefilterdeProducten);
-    //console.log(this.alleProducten);
-
-    /*
-      this.gefilterdeProducten = this.alleProducten.filter( p =>
-      p.naam.includes(naamFilter) &&
-      p.prijs >= prijsMin &&
-      p.prijs <= prijsMax &&
-      p.inhoud >= inhoudMin &&
-      p.inhoud <= inhoudMax &&
-      categorie.includes(p.categorie)
-    ) */
-
-
   }
 }

@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
@@ -80,7 +80,7 @@ exports.updateUser = (req, res, next) => {
     telefoon: req.body.telefoon,
     email: req.body.email,
     password: req.body.password,
-    isAdmin: false,
+    isAdmin: req.body.isAdmin,
   });
   User.updateOne({ _id: req.params.id }, user)
     .then(result => {

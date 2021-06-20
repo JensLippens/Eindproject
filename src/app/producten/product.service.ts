@@ -73,6 +73,8 @@ export class ProductService {
     categorie: string,
     image: File) {
     const productData = new FormData();
+    console.log(naam, omschrijving, prijs, verpakking, inhoud, categorie, image)
+
     productData.append("naam", naam);
     productData.append("omschrijving", omschrijving);
     productData.append("prijs", prijs.toString());
@@ -80,6 +82,7 @@ export class ProductService {
     productData.append("inhoud", inhoud.toString());
     productData.append("categorie", categorie);
     productData.append("image", image, naam);
+    console.log(productData);
     this.http
       .post<{ message: string, product: Product }>(
         BACKEND_URL,

@@ -5,9 +5,6 @@ import { Router } from "@angular/router";
 
 import { Product } from '../producten/product.model';
 import { OrderItem } from './orderitem.model';
-import { ProductFilterComponent } from '../producten/product-filter/product-filter.component';
-import { AuthData } from '../auth/auth-data.model';
-import { Bestelling } from '../bestelling/bestelling.model';
 
 @Injectable({
   providedIn: 'root'
@@ -116,5 +113,4 @@ export class MandjeService {
       this.router.navigate(["/checkout"]);
     }
   }
-  //
 }
