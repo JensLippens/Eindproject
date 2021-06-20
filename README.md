@@ -1,3 +1,7 @@
+## Hosting
+
+Project is te bekijken op http://eindproject-frontend.s3-website.eu-central-1.amazonaws.com/
+
 # Eindproject
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.7.
